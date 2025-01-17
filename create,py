@@ -1,0 +1,21 @@
+from transformers import AutoModelForImageClassification, AutoTokenizer
+from torch import nn, optim
+
+# Load the pre-trained Deep-Fake Detector Model from Hugging Face
+model_name = "prithivMLmods/Deep-Fake-Detector-Model"
+model = AutoModelForImageClassification.from_pretrained(model_name)
+
+# Freeze all layers to train only the last classification layer
+for param in model.parameters():
+    param.requires_grad = False
+
+# Replace the classifier layer to fine-tune for binary classification (real/fake)
+num_ftrs = model.classifier.in_features
+model.classifier = nn.Linear(num_ftrs, 2)  # Output: 2 classes (real, fake)
+
+# Set the model to train mode
+model.train()
+
+# Move the model to GPU (if available)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = model.to(device)

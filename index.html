@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detection</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Deepfake Detection</h1>
+        <p>Upload a video or an image to check if it contains a deepfake.</p>
+
+        <!-- File upload section -->
+        <div class="upload-section">
+            <input type="file" id="file-input" accept="video/,image/">
+            <button id="upload-btn">Upload</button>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loader" class="loader" style="display: none;"></div>
+
+        <!-- Results -->
+        <div id="result-section" style="display: none;">
+            <h2>Detection Results:</h2>
+            <p id="result-message">Loading...</p>
+            <p><strong>Confidence Score:</strong> <span id="confidence-score"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
